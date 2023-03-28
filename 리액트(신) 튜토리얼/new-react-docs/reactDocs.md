@@ -231,3 +231,17 @@ setValue function을 onClick에서 호출함으로써 React에게 button 클릭 
 - 저장된 value가 각 Square마다 독립적이다.
 
 component에 setValue(set)을 호출한다면 React는 자동적으로 자식 component의 내부까지 업데이트 한다.
+
+Lifting state up
+
+현재 각각의 Square component는 게임의 state를 유지하고 있다. 게임의 승자를 가리기 위해선 Board component는 어떻게든 각각의 Square components를 알아야 한다.
+
+Board component가 Square components를 알기 위해선 Board component(부모 component)에 Square components의 state를 저장하는 것이다.
+
+- Board component는 Square component에게 숫자를 전달할 때 처럼 prop을 전달하여 표시할 내용을 각 사각형에 알려줄 수 있다.
+
+여러 하위 항목에서 데이터를 수집하거나, 두개의 component가 서로 통신하도록 하려면 부모 구성 요소에서 공유 상태를 대신 선언한다.
+상위 구성 요소는 via props를 통해 해당 state를 자식에게 다시 전달할 수 있다.
+이렇게 하면 자식 구성 요소가 서로 및 부모 구성 요소와 동기화된다.
+
+Lifting state는 React components를 `결과의 변경 없이 코드의 구조를 재조정할`때 유용하다.
