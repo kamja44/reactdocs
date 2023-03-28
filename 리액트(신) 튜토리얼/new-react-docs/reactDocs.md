@@ -166,3 +166,68 @@ export default function Board(){
     )
 }
 ```
+
+Making an interactive component
+
+클릭했을 때 Square component를 Xㄹ ㅗ채우기
+
+- handleClick 함수를 Square 함수 안에 선언한다.
+- onClick을 JSX의 elment가 반환하는 button의 props에 추가한다.
+
+```js
+function Square({ value }) {
+  function handleClick() {
+    console.log("clicked!");
+  }
+  return (
+    <button className="square" onClick={handleClick}>
+      {value}
+    </button>
+  );
+}
+```
+
+- Square를 클릭하면 console에 clicked!가 출력된다.
+
+react의 useState component를 이용하여 component를 기억(저장)할 수 있다.
+Square component의 현재 값을 저장하고, Square 클릭 시 상태를 변경한다.
+
+useState를 사용하기 위해 react에서 import하고, Square 함수에서 value를 제거한 후, `const[value, setValue] = useState(null)`을 Square 함수에 추가한다.
+
+```js
+import { useState } from "react";
+
+function Square() {
+  const [value, setValue] = useState(null);
+
+  function handleClick() {
+    //....
+  }
+}
+```
+
+- useState의 첫 번째 매개변수
+  - 값을 저장한다.
+- useState의 두 번째 매개변수
+  - 값을 변경한다.
+- useState의 null은 value의 초깃값이다.
+
+Square component에서 더이상 props를 사용하지 않기 때문에 Board에서 정의한 value props을 제거한다.
+
+handleClick 함수의 console.log("clicked!")를 setValue("X")로 변경하여 Square 컴포넌트 클릭 시 X를 표시한다.
+
+```js
+function handleClick() {
+  setValue("X");
+}
+```
+
+setValue function을 onClick에서 호출함으로써 React에게 button 클릭 시 Square component를 리렌더링한다고 알릴 수 있다.
+
+- Square component가 리렌더링되면 Square의 value는 "X"가 되어 Square에 X가 표시되는 걸 볼 수 있다.
+
+각각의 Square component는 자신만의 state를 갖는다.
+
+- 저장된 value가 각 Square마다 독립적이다.
+
+component에 setValue(set)을 호출한다면 React는 자동적으로 자식 component의 내부까지 업데이트 한다.
