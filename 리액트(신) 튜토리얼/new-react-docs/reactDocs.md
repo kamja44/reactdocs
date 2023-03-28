@@ -245,3 +245,11 @@ Board component가 Square components를 알기 위해선 Board component(부모 
 이렇게 하면 자식 구성 요소가 서로 및 부모 구성 요소와 동기화된다.
 
 Lifting state는 React components를 `결과의 변경 없이 코드의 구조를 재조정할`때 유용하다.
+
+9개의 정사각형에 해당하는 9개의 null 배열로 기본값을 지정하는 사각형이라는 상태 변수를 선언하도록 보드 구성 요소를 편집한다.
+
+```js
+export default function Board() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+}
+```
