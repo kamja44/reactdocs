@@ -253,3 +253,50 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
 }
 ```
+
+Array(9).fill(null)은 9개의 요소와 배열을 만들고 요소의 값을 null로 설정한다.
+useState() 호출은 처음에 해당 배열로 설정된 제곱 상태 변수를 선언한다.
+각각의 배열의 값은 사각형의 값과 일치한다.
+추후에 board를 채우면 squares 배열은 아래와 같이 보인다.
+`["O", null, "X","X","X","O","O",null,null]`
+이제 Board component에서 value prop을 Square에 다음과 같이 보내야 한다.
+
+```js
+export default function Board(){
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  return(
+    <>
+      <div className="board-row">
+        <Square value={squares[0]}>
+        <Square value={squares[1]}>
+        <Square value={squares[2]}>
+      </div>
+      <div className="board-row">
+        <Square value={squares[3]}>
+        <Square value={squares[4]}>
+        <Square value={squares[5]}>
+      </div>
+      <div className="board-row">
+        <Square value={squares[6]}>
+        <Square value={squares[7]}>
+        <Square value={squares[8]}>
+      </div>
+    </>
+  )
+}
+```
+
+이후, Square component가 Board component로 부터 전달받은 value prop을 받을 수 있게 수정한다.
+
+- 이를 위해선 Square component 구성 요소의 상태 저장 값 추적 및 onClick prop을 제거해야 한다.
+
+```js
+function Square({ value }) {
+  return <button className="square">{value}</button>;
+}
+```
+
+이제 각 Square는 value prop은 "X","O",null을 가질 수 있다.
+
+- Square 클릭 시 값을 변경해 줘야 한다.
+-
